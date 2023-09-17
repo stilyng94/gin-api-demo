@@ -12,6 +12,7 @@ func InitializeAlbum(dbClient *ent.Client, router *gin.Engine) {
 	albumRouter := router.Group("/albums")
 	{
 		albumRouter.GET("/:id", albumController.GetAlbumByID)
+		albumRouter.DELETE("/:id", albumController.DeleteAlbumByID)
 		albumRouter.GET("", albumController.GetAlbums)
 		albumRouter.POST("", albumController.PostAlbums)
 	}

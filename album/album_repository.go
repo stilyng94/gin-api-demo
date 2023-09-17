@@ -10,6 +10,7 @@ type AlbumRepository interface {
 	AlbumByID(ctx context.Context, id int) (*ent.Album, error)
 	AddAlbum(ctx context.Context, alb ent.Album) (*ent.Album, error)
 	GetAlbums(ctx context.Context) ([]*ent.Album, error)
+	DeleteAlbumByID(ctx context.Context, id int) error
 }
 
 type albumRepository struct {
@@ -31,4 +32,8 @@ func (repo *albumRepository) AddAlbum(ctx context.Context, alb ent.Album) (*ent.
 
 func (repo *albumRepository) GetAlbums(ctx context.Context) ([]*ent.Album, error) {
 	return repo.dbClient.Album.Query().All(ctx)
+}
+
+func (repo *albumRepository) DeleteAlbumByID(ctx context.Context, id int) error {
+	return repo.dbClient.Album.DeleteOneID(id).Exec(ctx)
 }

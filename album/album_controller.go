@@ -60,3 +60,19 @@ func (handler *albumController) GetAlbumByID(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": album})
 
 }
+
+// [DeleteAlbumByID] deletes the album whose ID value matches the id
+func (handler *albumController) DeleteAlbumByID(c *gin.Context) {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"message": fmt.Sprintf("album with id %v not found", id)})
+	}
+
+	err = handler.albumRepo.DeleteAlbumByID(c, id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"message": fmt.Sprintf("album with id %d not found", id)})
+		return
+	}
+	c.JSON(http.StatusNoContent, gin.H{"message": "album deleted successfully"})
+
+}
