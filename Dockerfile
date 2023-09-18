@@ -31,4 +31,4 @@ USER go
 
 ENTRYPOINT ["/usr/bin/dumb-init", "--"]
 
-CMD ["/bin/sh", "-c", "./scripts/start.sh"]
+CMD ["/bin/sh", "-c", "./start.sh"]
