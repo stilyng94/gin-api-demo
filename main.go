@@ -11,6 +11,7 @@ import (
 func main() {
 	settings := config.NewSetting()
 	dbClient := config.OpenDB(settings.DatabaseUrl)
+	defer dbClient.Close()
 
 	router := gin.Default()
 	album.InitializeAlbum(dbClient, router)
